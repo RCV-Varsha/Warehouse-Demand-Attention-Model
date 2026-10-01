@@ -1,0 +1,9 @@
+d_model: 16
+epochs: 24
+batch: 256
+lr: 0.003
+patience: 5
+ridge_alpha: 10.0
+adapt_epochs: 10
+adapt_samples: 512
+rank: 2
