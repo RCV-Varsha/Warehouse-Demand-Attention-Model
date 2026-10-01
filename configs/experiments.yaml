@@ -1,0 +1,7 @@
+seed_offsets: [0, 1, 2, 3, 4]
+key_dims: [4, 16, 64, 256]
+learning_rates: [0.0003, 0.01, 0.1]
+init_scales: [0.1, 1.0, 10.0]
+profile_lengths: [16, 32, 64, 128, 256]
+profile_repeats: 20
+paper_samples: 20000
