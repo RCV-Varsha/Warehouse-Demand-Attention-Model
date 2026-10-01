@@ -1,0 +1,17 @@
+hours: 8760
+base: 100.0
+trend: 0.10
+daily_amplitudes: [0.30, -0.12]
+daily_center: 12
+weekday: [1.10, 1.05, 1.05, 1.10, 1.00, 0.70, 0.50]
+noise0: 6.0
+noise1: 0.12
+spike_rate: 0.36
+spike_median: 1.6
+spike_logstd: 0.4
+spike_tau: 3.0
+spike_duration: 24
+drop_rate: 0.04
+drop_min: 0.2
+drop_max: 0.5
+drop_duration: [2, 5]

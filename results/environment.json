@@ -1,0 +1,9 @@
+{
+  "device": "cpu",
+  "numpy": "2.2.3",
+  "os": "Windows-10-10.0.26200-SP0",
+  "python": "3.11.9",
+  "seed": 0,
+  "threads": 1,
+  "torch": "2.6.0+cpu"
+}
