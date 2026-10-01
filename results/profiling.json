@@ -1,0 +1,115 @@
+{
+  "measurement": "CPU profiler allocation-event high-water mark; excludes process/library RSS; wall times are nondeterministic",
+  "rows": [
+    {
+      "allocator_peak_bytes": 22716,
+      "dtype": "torch.float32",
+      "n": 16,
+      "retained_tensor_bytes": 9216,
+      "seconds": 0.00013383000041358172,
+      "softmax_seconds": {
+        "naive": 1.6175000928342344e-05,
+        "stable": 6.302500260062516e-05
+      }
+    },
+    {
+      "allocator_peak_bytes": 71964,
+      "dtype": "torch.float32",
+      "n": 32,
+      "retained_tensor_bytes": 26624,
+      "seconds": 0.00010091000003740192,
+      "softmax_seconds": {
+        "naive": 7.960002403706312e-06,
+        "stable": 5.150999641045928e-05
+      }
+    },
+    {
+      "allocator_peak_bytes": 250332,
+      "dtype": "torch.float32",
+      "n": 64,
+      "retained_tensor_bytes": 86016,
+      "seconds": 0.00012304999982006847,
+      "softmax_seconds": {
+        "naive": 9.475002298131584e-06,
+        "stable": 6.616999744437634e-05
+      }
+    },
+    {
+      "allocator_peak_bytes": 926556,
+      "dtype": "torch.float32",
+      "n": 128,
+      "retained_tensor_bytes": 303104,
+      "seconds": 0.00022418000153265894,
+      "softmax_seconds": {
+        "naive": 1.8429994815960528e-05,
+        "stable": 0.00012452499940991403
+      }
+    },
+    {
+      "allocator_peak_bytes": 3556956,
+      "dtype": "torch.float32",
+      "n": 256,
+      "retained_tensor_bytes": 1130496,
+      "seconds": 0.0005858649965375662,
+      "softmax_seconds": {
+        "naive": 0.00012008000048808753,
+        "stable": 0.00033811000175774095
+      }
+    },
+    {
+      "allocator_peak_bytes": 43956,
+      "dtype": "torch.float64",
+      "n": 16,
+      "retained_tensor_bytes": 18432,
+      "seconds": 9.494500118307769e-05,
+      "softmax_seconds": {
+        "naive": 9.490002412348986e-06,
+        "stable": 4.8439996317029e-05
+      }
+    },
+    {
+      "allocator_peak_bytes": 139028,
+      "dtype": "torch.float64",
+      "n": 32,
+      "retained_tensor_bytes": 53248,
+      "seconds": 0.00010594499763101339,
+      "softmax_seconds": {
+        "naive": 8.225004421547055e-06,
+        "stable": 4.84699965454638e-05
+      }
+    },
+    {
+      "allocator_peak_bytes": 482772,
+      "dtype": "torch.float64",
+      "n": 64,
+      "retained_tensor_bytes": 172032,
+      "seconds": 0.00013409999664872884,
+      "softmax_seconds": {
+        "naive": 1.2979999883100391e-05,
+        "stable": 6.630000425502657e-05
+      }
+    },
+    {
+      "allocator_peak_bytes": 1784660,
+      "dtype": "torch.float64",
+      "n": 128,
+      "retained_tensor_bytes": 606208,
+      "seconds": 0.00026577499811537565,
+      "softmax_seconds": {
+        "naive": 3.093999694101512e-05,
+        "stable": 0.00019320499850437046
+      }
+    },
+    {
+      "allocator_peak_bytes": 6846036,
+      "dtype": "torch.float64",
+      "n": 256,
+      "retained_tensor_bytes": 2260992,
+      "seconds": 0.0006366899993736297,
+      "softmax_seconds": {
+        "naive": 0.00011036000214517116,
+        "stable": 0.00047798999585211275
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "rows": [
+    {
+      "dk": 4,
+      "samples": 20000,
+      "scaled_variance": 1.001000652932699,
+      "variance": 4.004002611730796
+    },
+    {
+      "dk": 16,
+      "samples": 20000,
+      "scaled_variance": 1.005265226715154,
+      "variance": 16.084243627442465
+    },
+    {
+      "dk": 64,
+      "samples": 20000,
+      "scaled_variance": 0.9908329137997786,
+      "variance": 63.41330648318583
+    },
+    {
+      "dk": 256,
+      "samples": 20000,
+      "scaled_variance": 1.0075214606439284,
+      "variance": 257.9254939248457
+    }
+  ],
+  "section": "3.2.1 footnote",
+  "source": "https://arxiv.org/html/1706.03762#S3.SS2.SSS1"
+}
