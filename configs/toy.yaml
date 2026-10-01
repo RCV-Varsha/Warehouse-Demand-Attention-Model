@@ -1,0 +1,9 @@
+keys: 8
+values: 4
+pairs: 4
+d_model: 16
+steps: 250
+batch: 64
+validation: 512
+lr: 0.01
+threshold: 0.90
