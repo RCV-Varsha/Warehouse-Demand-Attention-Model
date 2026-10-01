@@ -1,0 +1,144 @@
+{
+  "all_masked": [
+    [
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "attention_output_max_abs": {
+    "torch.float16": 0.000411567774394328,
+    "torch.float32": 5.157649540787901e-08,
+    "torch.float64": 0.0
+  },
+  "softmax": [
+    {
+      "dtype": "torch.float16",
+      "entropy": 0.83203125,
+      "gradient_norm": 0.76513671875,
+      "naive_finite": true,
+      "scale": 1,
+      "stable_finite": true
+    },
+    {
+      "dtype": "torch.float16",
+      "entropy": 0.0004405975341796875,
+      "gradient_norm": 0.0001926422119140625,
+      "naive_finite": false,
+      "scale": 10,
+      "stable_finite": true
+    },
+    {
+      "dtype": "torch.float16",
+      "entropy": -0.0,
+      "gradient_norm": 0.0,
+      "naive_finite": false,
+      "scale": 100,
+      "stable_finite": true
+    },
+    {
+      "dtype": "torch.float16",
+      "entropy": -0.0,
+      "gradient_norm": 0.0,
+      "naive_finite": false,
+      "scale": 1000,
+      "stable_finite": true
+    },
+    {
+      "dtype": "torch.float32",
+      "entropy": 0.8323955535888672,
+      "gradient_norm": 0.7644715905189514,
+      "naive_finite": true,
+      "scale": 1,
+      "stable_finite": true
+    },
+    {
+      "dtype": "torch.float32",
+      "entropy": 0.0004994396585971117,
+      "gradient_norm": 0.00019259954569861293,
+      "naive_finite": true,
+      "scale": 10,
+      "stable_finite": true
+    },
+    {
+      "dtype": "torch.float32",
+      "entropy": 3.3042617788779187e-42,
+      "gradient_norm": 0.0,
+      "naive_finite": false,
+      "scale": 100,
+      "stable_finite": true
+    },
+    {
+      "dtype": "torch.float32",
+      "entropy": -0.0,
+      "gradient_norm": 0.0,
+      "naive_finite": false,
+      "scale": 1000,
+      "stable_finite": true
+    },
+    {
+      "dtype": "torch.float64",
+      "entropy": 0.8323955818399389,
+      "gradient_norm": 0.7644715828392816,
+      "naive_finite": true,
+      "scale": 1,
+      "stable_finite": true
+    },
+    {
+      "dtype": "torch.float64",
+      "entropy": 0.0004994208675666009,
+      "gradient_norm": 0.00019259955760351239,
+      "naive_finite": true,
+      "scale": 10,
+      "stable_finite": true
+    },
+    {
+      "dtype": "torch.float64",
+      "entropy": 3.7200759760208363e-42,
+      "gradient_norm": 1.5782945695040986e-43,
+      "naive_finite": true,
+      "scale": 100,
+      "stable_finite": true
+    },
+    {
+      "dtype": "torch.float64",
+      "entropy": -0.0,
+      "gradient_norm": 0.0,
+      "naive_finite": false,
+      "scale": 1000,
+      "stable_finite": true
+    }
+  ],
+  "temperature": [
+    {
+      "entropy": 1.3784263187556864,
+      "rank": 5,
+      "temperature": 0.1
+    },
+    {
+      "entropy": 1.5768767709029388,
+      "rank": 5,
+      "temperature": 0.3
+    },
+    {
+      "entropy": 1.6063658138277526,
+      "rank": 5,
+      "temperature": 1.0
+    },
+    {
+      "entropy": 1.60909352662189,
+      "rank": 5,
+      "temperature": 3.0
+    },
+    {
+      "entropy": 1.6094068376862851,
+      "rank": 5,
+      "temperature": 10.0
+    }
+  ]
+}
