@@ -33,6 +33,14 @@ Inspection of the actual path caught this before experimental execution. Correct
 to the repository parent of src; generated files then appeared under this repository.
 This is a review finding, not a fabricated runtime failure.
 
+## Portable Make download
+The first SourceForge download returned HTML rather than the requested ZIP.
+Archive extraction failed; inspecting the file header confirmed HTML. The PyPI
+gnumake build then failed to launch with Windows access-denied errors. A native
+Windows build from `mbuilov/gnumake-windows` successfully printed its version.
+The reproduction script supports `WDAM_MAKE` to select that executable explicitly.
+These failures were setup issues; no experimental result was inferred from them.
+
 ## Deliberate mathematical mutations
 `tests/test_attention.py` explicitly constructs broken alternatives and asserts
 that the same mathematical contract rejects them:

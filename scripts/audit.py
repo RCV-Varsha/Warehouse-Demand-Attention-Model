@@ -16,16 +16,21 @@ def run(seed):
             if forbidden.search(text): matches.append(dict(path=str(path.relative_to(ROOT)),line=line,text=text))
     all_json=list((ROOT/'results').glob('*.json'))
     for p in all_json: json.loads(p.read_text(),parse_constant=lambda s:(_ for _ in ()).throw(ValueError(s)))
+    unfilled=[]
+    if (ROOT/'results/summary.json').exists():
+        for p in [ROOT/'README.md',*(ROOT/'docs').glob('*.md')]:
+            if 'Not run yet.' in p.read_text(encoding='utf-8'): unfilled.append(str(p.relative_to(ROOT)))
     mutations=[]
     if (ROOT/'tmp/tests.xml').exists():
         tree=ET.parse(ROOT/'tmp/tests.xml')
         mutations=[dict(name=e.attrib['name'],passed=not any(c.tag in ['failure','error','skipped'] for c in e)) for e in tree.iter('testcase') if 'mutation' in e.attrib['name']]
     evidence=dict(seed=seed,pytest_returncode=result.returncode,pytest_output=result.stdout,
-                  forbidden_matches=matches,mutation_tests=mutations,json_files_checked=len(all_json))
+                  forbidden_matches=matches,mutation_tests=mutations,json_files_checked=len(all_json),unfilled_result_documents=unfilled)
     save('verification.json',evidence)
     print(result.stdout)
     assert result.returncode==0,result.stderr
     assert not matches
+    assert not unfilled
     assert len(mutations)==3 and all(m['passed'] for m in mutations)
 
 

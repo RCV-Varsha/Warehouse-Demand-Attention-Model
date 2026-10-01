@@ -3,16 +3,22 @@
     "full": {
       "mae_mean": 20.85978328213345,
       "mae_std": 1.5081050345968037,
+      "paired_difference_mean": -0.2110955123840256,
+      "paired_difference_std": 0.34873168982128244,
       "trainable": 1537
     },
     "lora": {
       "mae_mean": 21.037524102647563,
       "mae_std": 1.6933980364289491,
+      "paired_difference_mean": -0.033354691869909206,
+      "paired_difference_std": 0.06096918229706834,
       "trainable": 128
     },
     "none": {
       "mae_mean": 21.070878794517476,
       "mae_std": 1.7393077464589866,
+      "paired_difference_mean": 0.0,
+      "paired_difference_std": 0.0,
       "trainable": 0
     }
   },

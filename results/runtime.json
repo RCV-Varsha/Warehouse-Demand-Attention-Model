@@ -1,0 +1,19 @@
+{
+  "stage_seconds": {
+    "ablation_scaling": 92.89130750007462,
+    "attention_viz": 1.5849569999845698,
+    "dataset": 3.7428398999618366,
+    "ext_jax_compare": 4.505024799960665,
+    "ext_lora_adaptation": 5.305108700064011,
+    "ext_paper_repro": 0.8834382999921218,
+    "ext_profiling": 1.9365618000738323,
+    "failure_analysis": 0.6719073000131175,
+    "generalization_shift": 2.9958425000077114,
+    "gradcheck": 2.494159599998966,
+    "numerical_stability": 1.4613591999514028,
+    "toy_task": 5.98161729995627,
+    "training_dynamics": 17.22594500007108,
+    "warehouse_train_eval": 142.90323319996241
+  },
+  "total_seconds": 284.5833021000726
+}

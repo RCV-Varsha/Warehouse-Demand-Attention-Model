@@ -19,6 +19,7 @@ def run(seed):
             achieved=[r['steps_to_threshold'] for r in runs if r['steps_to_threshold'] is not None]
             g['threshold_reached']=len(achieved)
             g['steps_to_threshold_mean_if_reached']=float(np.mean(achieved)) if achieved else None
+            g['steps_to_threshold_std_if_reached']=float(np.std(achieved,ddof=1)) if len(achieved)>1 else None
             groups.append(g)
     save('ablation_scaling.json',dict(runs=rows,groups=groups))
     fig,ax=plt.subplots(1,3,figsize=(13,4))

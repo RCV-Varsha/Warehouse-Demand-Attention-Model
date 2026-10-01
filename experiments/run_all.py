@@ -23,6 +23,8 @@ def run(seed):
     summarize(seed)
     from scripts.fill_tables import run as fill
     fill(seed)
+    from scripts.audit import run as audit
+    audit(seed)
 
 
 def summarize(seed):

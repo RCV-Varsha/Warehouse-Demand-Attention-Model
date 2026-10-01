@@ -8,7 +8,15 @@ significance. The paired difference standard deviations are in `warehouse.json`.
 
 ## Hypothesis vs Observation
 <!-- AUTO:HYPOTHESES -->
-Not run yet.
+| Hypothesis (verbatim) | Observation | Decision |
+| --- | --- | --- |
+| For d_k >= 64, unscaled toy attention has lower mean initial entropy and lower final accuracy than scaled attention; independent unit-variance dot products have scaled variance within 10% of 1. | Entropy condition: True; accuracy condition: False; variance condition: True | Not supported in full |
+| Warehouse attention improves test MAE by at least 10% over last value and MA-24, and is within 15% of both seasonal naive and ridge MAE. | Attention/reference MAE ratios: last_value=0.715, moving_average=0.346, seasonal_naive=0.332, ridge=0.888 | Not supported in full |
+| Mean attention mass on lag 24 plus lags 1, 2 and 3 exceeds 25% on warehouse test windows. | Selected-lag mass 0.2768 | Supported |
+| Combined shift increases every model's MAE by at least 20%; attention's relative degradation on spike hours exceeds its degradation on normal hours. | Combined relative MAE changes {'attention': 1.287342608910968, 'last_value': 0.9646990657058916, 'moving_average': 0.3797372711543081, 'ridge': 1.0651111383454959, 'seasonal_naive': 0.6022090463913989}; spike 1.129, normal 0.930 | Supported |
+| Spike-onset MAE is at least twice normal-hour MAE, and mean signed error in hours 1 through 3 after onset is positive. | Onset MAE 91.773; normal MAE 8.341; post-onset bias -22.685 | Not supported in full |
+| Toy attention exceeds 90% validation accuracy and the mean-pool control stays below 60%. | Attention accuracy 1.0000; mean-pool accuracy 0.5605 | Supported |
+| Rank-2 Q/V adapters use fewer trainable parameters than full fine-tuning and improve shifted-test MAE over no adaptation. | LoRA MAE 21.038; no adaptation 21.071 | Supported |
 <!-- /AUTO:HYPOTHESES -->
 
 ## Warehouse model and baselines
@@ -20,7 +28,15 @@ for attention, last value, moving average, seasonal naive and ridge. A learned
 pooling query and unscaled attention are secondary controlled comparisons.
 
 <!-- AUTO:WAREHOUSE -->
-Not run yet.
+| Model | MAE mean ± sample std | RMSE mean ± std | MASE mean ± std | Attention minus model MAE | Difference % ± std |
+| --- | --- | --- | --- | --- | --- |
+| attention | 9.212 ± 0.364 | 13.724 ± 1.178 | 0.365 ± 0.016 | 0.000 | 0.00 ± 0.00 |
+| last_value | 12.889 ± 0.271 | 17.641 ± 0.912 | 0.510 ± 0.011 | -3.677 | -28.54 ± 2.00 |
+| learned_pool | 9.365 ± 0.474 | 13.805 ± 1.355 | 0.371 ± 0.017 | -0.153 | -1.54 ± 3.88 |
+| moving_average | 26.656 ± 0.885 | 34.166 ± 1.744 | 1.055 ± 0.029 | -17.444 | -65.43 ± 1.14 |
+| ridge | 10.370 ± 0.323 | 14.776 ± 1.073 | 0.411 ± 0.011 | -1.158 | -11.16 ± 2.74 |
+| seasonal_naive | 27.749 ± 1.926 | 38.211 ± 3.067 | 1.098 ± 0.064 | -18.537 | -66.72 ± 1.72 |
+| unscaled | 9.292 ± 0.261 | 13.818 ± 1.192 | 0.368 ± 0.009 | -0.081 | -0.87 ± 2.63 |
 <!-- /AUTO:WAREHOUSE -->
 
 Source: `results/warehouse.json`; plot: `results/warehouse_comparison.png`.
@@ -37,7 +53,16 @@ last update. Steps-to-threshold is null if the validation threshold is never rea
 conditional averages exclude those censored runs, with counts reported.
 
 <!-- AUTO:ABLATION -->
-Not run yet.
+| d_k | Scaled | Final accuracy ± std | Initial entropy ± std | Initial logit variance | Reached threshold |
+| --- | --- | --- | --- | --- | --- |
+| 4 | False | 1.0000 ± 0.0000 | 1.3841 ± 0.0014 | 0.00646 | 5 |
+| 4 | True | 1.0000 ± 0.0000 | 1.3857 ± 0.0003 | 0.00161 | 5 |
+| 16 | False | 1.0000 ± 0.0000 | 1.3762 ± 0.0019 | 0.02863 | 5 |
+| 16 | True | 1.0000 ± 0.0000 | 1.3857 ± 0.0001 | 0.00179 | 5 |
+| 64 | False | 1.0000 ± 0.0000 | 1.3351 ± 0.0160 | 0.15395 | 5 |
+| 64 | True | 1.0000 ± 0.0000 | 1.3854 ± 0.0003 | 0.00241 | 5 |
+| 256 | False | 1.0000 ± 0.0000 | 1.1832 ± 0.0591 | 0.78675 | 5 |
+| 256 | True | 1.0000 ± 0.0000 | 1.3852 ± 0.0005 | 0.00307 | 5 |
 <!-- /AUTO:ABLATION -->
 
 Source: `results/ablation_scaling.json`; plot: `results/ablation_scaling.png`.
@@ -56,17 +81,97 @@ similarity magnitudes through the bilinear projections. This is a plausible
 mechanism, not proof that saturation alone caused forecast degradation.
 
 <!-- AUTO:SHIFT -->
-Not run yet.
+| Distribution | attention | last_value | moving_average | ridge | seasonal_naive |
+| --- | --- | --- | --- | --- | --- |
+| base | 9.212 ± 0.364 | 12.889 ± 0.271 | 26.656 ± 0.885 | 10.370 ± 0.323 | 27.749 ± 1.926 |
+| combined | 21.071 ± 1.739 | 25.322 ± 1.462 | 36.779 ± 2.475 | 21.416 ± 1.322 | 44.460 ± 3.628 |
+| magnitude | 10.393 ± 0.695 | 13.750 ± 0.537 | 28.486 ± 1.486 | 11.333 ± 0.611 | 30.751 ± 3.071 |
+| noise | 16.632 ± 0.462 | 22.038 ± 0.232 | 29.969 ± 1.059 | 18.137 ± 0.302 | 33.935 ± 1.826 |
+| rate | 10.744 ± 0.656 | 14.149 ± 0.690 | 28.577 ± 1.059 | 11.558 ± 0.597 | 31.121 ± 1.638 |
 <!-- /AUTO:SHIFT -->
 
 Source: `results/generalization_shift.json`; plot: `results/generalization_shift.png`.
 
 ## Gradients, stability, toy learning, dynamics and extensions
 <!-- AUTO:DETAILS -->
-Not run yet.
+Primary warehouse model by slice: | Slice | Counts by seed | MAE ± std | RMSE ± std | MASE ± std | Bias mean |
+| --- | --- | --- | --- | --- | --- |
+| all | [1266, 1266, 1266, 1266, 1266] | 9.212 ± 0.364 | 13.724 ± 1.178 | 0.365 ± 0.016 | -1.689 |
+| drop | [5, 17, 6, 0, 7] | 30.520 ± 9.625 | 32.714 ± 11.545 | 1.215 ± 0.374 | 30.520 |
+| normal | [1053, 1099, 1188, 1021, 1127] | 8.341 ± 0.290 | 10.732 ± 0.417 | 0.330 ± 0.018 | -1.072 |
+| onset | [8, 7, 3, 10, 7] | 91.773 ± 23.835 | 99.570 ± 21.542 | 3.637 ± 0.983 | -90.762 |
+| post_spike | [24, 21, 9, 30, 21] | 26.553 ± 10.276 | 31.957 ± 10.782 | 1.057 ± 0.435 | -22.685 |
+| spike | [209, 150, 72, 245, 139] | 14.579 ± 1.870 | 25.833 ± 4.259 | 0.579 ± 0.088 | -7.719 |
+| weekday | [882, 882, 882, 882, 882] | 10.122 ± 0.830 | 14.978 ± 2.244 | 0.401 ± 0.029 | -2.605 |
+| weekend | [384, 384, 384, 384, 384] | 7.122 ± 0.864 | 9.850 ± 1.977 | 0.283 ± 0.041 | 0.413 |
+
+Gradient checks: | dtype | parameter | manual relative error |
+| --- | --- | --- |
+| torch.float64 | X | 1.303e-16 |
+| torch.float64 | W_Q | 1.584e-16 |
+| torch.float64 | W_K | 2.151e-16 |
+| torch.float64 | W_V | 0.000e+00 |
+| torch.float32 | X | 3.128e-08 |
+| torch.float32 | W_Q | 1.666e-07 |
+| torch.float32 | W_K | 3.167e-07 |
+| torch.float32 | W_V | 0.000e+00 |
+
+Numerical stability: | dtype | logit multiplier | naive finite | stable finite | entropy | gradient norm |
+| --- | --- | --- | --- | --- | --- |
+| torch.float16 | 1 | True | True | 0.83203125 | 0.76513671875 |
+| torch.float16 | 10 | False | True | 0.0004405975341796875 | 0.0001926422119140625 |
+| torch.float16 | 100 | False | True | -0.0 | 0.0 |
+| torch.float16 | 1000 | False | True | -0.0 | 0.0 |
+| torch.float32 | 1 | True | True | 0.8323955535888672 | 0.7644715905189514 |
+| torch.float32 | 10 | True | True | 0.0004994396585971117 | 0.00019259954569861293 |
+| torch.float32 | 100 | False | True | 3.3042617788779187e-42 | 0.0 |
+| torch.float32 | 1000 | False | True | -0.0 | 0.0 |
+| torch.float64 | 1 | True | True | 0.8323955818399389 | 0.7644715828392816 |
+| torch.float64 | 10 | True | True | 0.0004994208675666009 | 0.00019259955760351239 |
+| torch.float64 | 100 | True | True | 3.7200759760208363e-42 | 1.5782945695040986e-43 |
+| torch.float64 | 1000 | False | True | -0.0 | 0.0 |
+
+Toy: | Model | Initial val loss | Final val loss | Final accuracy |
+| --- | --- | --- | --- |
+| attention | 1.3950645923614502 | 5.771728319814429e-05 | 1.0 |
+| mean_pool | 1.3978846073150635 | 0.9867565035820007 | 0.560546875 |
+
+Training dynamics: | LR | Q/K init scale | Initial entropy | Initial Q gradient | Final val loss | Final accuracy |
+| --- | --- | --- | --- | --- | --- |
+| 0.0003 | 0.1 | 1.3862943649291992 | 0.0002817684435285628 | 1.2883683443069458 | 0.48046875 |
+| 0.0003 | 1.0 | 1.3856704235076904 | 0.002832095604389906 | 1.278993010520935 | 0.5 |
+| 0.0003 | 10.0 | 0.4470943808555603 | 0.004839353729039431 | 1.2683318853378296 | 0.525390625 |
+| 0.01 | 0.1 | 1.3862943649291992 | 0.0002817684435285628 | 0.00012468232307583094 | 1.0 |
+| 0.01 | 1.0 | 1.3856704235076904 | 0.002832095604389906 | 5.771728319814429e-05 | 1.0 |
+| 0.01 | 10.0 | 0.4470943808555603 | 0.004839353729039431 | 0.00034795948886312544 | 1.0 |
+| 0.1 | 0.1 | 1.3862943649291992 | 0.0002817684435285628 | 1.1615145206451416 | 0.595703125 |
+| 0.1 | 1.0 | 1.3856704235076904 | 0.002832095604389906 | 0.653938889503479 | 0.849609375 |
+| 0.1 | 10.0 | 0.4470943808555603 | 0.004839353729039431 | 1.0874556303024292 | 0.59375 |
+
+At fixed Q/K init scale, raising LR from 0.01 to 0.1 changes final validation accuracy from 1.0000 to 0.8496. At fixed LR 0.01, increasing init scale from 1.0 to 10.0 lowers initial entropy from 1.3857 to 0.4471, yet final accuracy is 1.0000. Thus initial saturation alone does not establish failed learning; the optimizer can alter the projection scale. These outcomes follow directly from the dynamics traces.
+
+Adaptation: | Method | Trainable parameters | MAE ± std | Paired MAE change ± std |
+| --- | --- | --- | --- |
+| full | 1537 | 20.860 ± 1.508 | -0.2111 ± 0.3487 |
+| lora | 128 | 21.038 ± 1.693 | -0.0334 ± 0.0610 |
+| none | 0 | 21.071 ± 1.739 | 0.0000 ± 0.0000 |
+
+The LoRA mean change is smaller than its paired-seed standard deviation; under the predeclared descriptive rule the practical improvement is inconclusive.
+
+JAX: | Causal | Output max error | Largest gradient error |
+| --- | --- | --- |
+| False | 4.440892098500626e-16 | 7.105427357601002e-15 |
+| True | 8.881784197001252e-16 | 7.105427357601002e-15 |
+
+Paper reproduction: | d_k | Raw variance | Scaled variance |
+| --- | --- | --- |
+| 4 | 4.004002611730796 | 1.001000652932699 |
+| 16 | 16.084243627442465 | 1.005265226715154 |
+| 64 | 63.41330648318583 | 0.9908329137997786 |
+| 256 | 257.9254939248457 | 1.0075214606439284 |
 <!-- /AUTO:DETAILS -->
 
-Sources, in table order: `results/gradcheck.json`, `numerical_stability.json`,
+Sources, in table order: `results/slice_summary.json`, `gradcheck.json`, `numerical_stability.json`,
 `toy_task.json`, `training_dynamics.json`, `lora_adaptation.json`, `jax_compare.json`,
 `paper_reproduction.json`.
 
@@ -75,6 +180,9 @@ X and each projection. Max absolute differences and the complete analytical and
 numerical vectors accompany relative errors. Float32 loses meaningful differences
 at small epsilon sooner than float64. See `gradcheck_eps_sweep.png`; the tradeoff is
 truncation versus subtractive round-off, not evidence of an exact symbolic result.
+The W_V curve need not turn upward at larger epsilon: with Q and K fixed, the
+chosen squared-output loss is quadratic in W_V, so central differences have no
+truncation term for that parameter. The remaining discrepancy is round-off.
 
 Max subtraction prevents exponential overflow but cannot prevent a sharply peaked
 probability row. The stability experiment fixes upstream value coefficients so the

@@ -1,0 +1,19 @@
+{
+  "commands": [
+    [
+      "C:\\Users\\CHAKRA VARSHINI\\OneDrive\\Documents\\_GCRS\\Prateep\\warehouse-attention\\tmp\\make-native.exe",
+      "reset",
+      "SEED=0"
+    ],
+    [
+      "C:\\Users\\CHAKRA VARSHINI\\OneDrive\\Documents\\_GCRS\\Prateep\\warehouse-attention\\tmp\\make-native.exe",
+      "all",
+      "SEED=0"
+    ]
+  ],
+  "first_sha256": "d944a9f45359fc65f35ff5b427a0730460c3090c7dafcebb5aea2256753b3df1",
+  "gnu_make": true,
+  "identical": true,
+  "second_sha256": "d944a9f45359fc65f35ff5b427a0730460c3090c7dafcebb5aea2256753b3df1",
+  "seed": 0
+}

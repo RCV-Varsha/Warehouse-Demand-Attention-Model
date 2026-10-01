@@ -29,6 +29,10 @@ def run(seed):
                 trainable=sum(p.numel() for p in model.parameters() if p.requires_grad),training=logs,
                 adaptation_targets=[int(train['t'][0]),int(train['t'][-1])],validation_targets=[int(val['t'][0]),int(val['t'][-1])],test_targets=[int(test['t'][0]),int(test['t'][-1])]))
     groups={m:dict(mae_mean=float(np.mean([r['mae'] for r in rows if r['method']==m])),mae_std=float(np.std([r['mae'] for r in rows if r['method']==m],ddof=1)),trainable=next(r['trainable'] for r in rows if r['method']==m)) for m in ['none','full','lora']}
+    for method,g in groups.items():
+        differences=[r['mae']-next(b['mae'] for b in rows if b['seed']==r['seed'] and b['method']=='none') for r in rows if r['method']==method]
+        g['paired_difference_mean']=float(np.mean(differences))
+        g['paired_difference_std']=float(np.std(differences,ddof=1))
     save('lora_adaptation.json',dict(runs=rows,groups=groups))
     plt.bar(list(groups),[g['mae_mean'] for g in groups.values()],yerr=[g['mae_std'] for g in groups.values()]); plt.ylabel('Shifted-test MAE'); finish('lora_adaptation.png')
 

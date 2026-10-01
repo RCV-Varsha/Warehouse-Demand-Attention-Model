@@ -11,7 +11,12 @@ independent random onset hours from past demand alone.
 
 ## Actual behavior and evidence
 <!-- AUTO:FAILURE -->
-Not run yet.
+| Case | Hour | Target is onset | Actual | Predicted | Error | Input spike attention mass | Counterfactual delta prediction | Attention L1 delta |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| worst_overall | 7816 | True | 261.8182520710774 | 130.6433868408203 | -131.17486523025707 | 0.9014344811439514 | 4.986151695251465 | 0.10188737511634827 |
+| worst_with_input_spike | 7816 | True | 261.8182520710774 | 130.6433868408203 | -131.17486523025707 | 0.9014344811439514 | 4.986151695251465 | 0.10188737511634827 |
+
+For the selected historical-spike case, removing the input spike raises the forecast by 4.986 orders, while the original absolute error is 131.175. This is inconsistent with a simple story that the past spike only pushes the prediction upward. The target is a new unpredictable onset; the counterfactual does not remove that target event. Across seeds, post-onset mean signed bias is -22.685 orders (results/hypotheses.json); underprediction contradicts the positive-bias component of H5.
 <!-- /AUTO:FAILURE -->
 
 Source: `results/failure_analysis.json`. The signed error is prediction minus truth.

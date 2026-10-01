@@ -1,0 +1,21 @@
+{
+  "criterion": "Conjunction of all predeclared conditions; descriptive seed means, not a significance test",
+  "evidence": {
+    "H1": "Entropy condition: True; accuracy condition: False; variance condition: True",
+    "H2": "Attention/reference MAE ratios: last_value=0.715, moving_average=0.346, seasonal_naive=0.332, ridge=0.888",
+    "H3": "Selected-lag mass 0.2768",
+    "H4": "Combined relative MAE changes {'attention': 1.287342608910968, 'last_value': 0.9646990657058916, 'moving_average': 0.3797372711543081, 'ridge': 1.0651111383454959, 'seasonal_naive': 0.6022090463913989}; spike 1.129, normal 0.930",
+    "H5": "Onset MAE 91.773; normal MAE 8.341; post-onset bias -22.685",
+    "H6": "Attention accuracy 1.0000; mean-pool accuracy 0.5605",
+    "H7": "LoRA MAE 21.038; no adaptation 21.071"
+  },
+  "supported": {
+    "H1": false,
+    "H2": false,
+    "H3": true,
+    "H4": true,
+    "H5": false,
+    "H6": true,
+    "H7": true
+  }
+}
